@@ -3,7 +3,4 @@
  *
  */
 includeTargets << new File("${basedir}/scripts/_PlantUML.groovy")
-
 setDefaultTarget("createPumlDiagrams")
-
-
