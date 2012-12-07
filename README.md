@@ -2,7 +2,7 @@ grails-plantuml-plugin
 ======================
 
 PlantUML grails plugin to generate UML diagrams from sources.
-Intended to be useful for generating images for use withing grails
+Intended to be useful for generating images for use within grails
 project documentation (gdocs).
 
 The plugin provides two things:
