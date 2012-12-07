@@ -1,42 +1,28 @@
 class GrailsPlantumlPluginGrailsPlugin {
-    // the plugin version
     def version = "0.1"
-    // the version or versions of Grails the plugin is designed for
-    def grailsVersion = "2.1 > *"
-    // the other plugins this plugin depends on
-    def dependsOn = [:]
-    // resources that are excluded from plugin packaging
+    def grailsVersion = "1.3.7 > *"
+    def title = "Grails Plantuml Plugin"
+    def author = "David W Millar"
+    def authorEmail = "david.w.millar@gmail.com"
+    def license = "APACHE" // v2
+    def description = '''\
+Grails plugin to help out with PlantUML diagram generation from source files.
+It is also intended to be easy to use to generate diagrams for your grails project documentation.
+'''
+    // Maybe one day, this won't be a lie
+    def documentation = "http://grails.org/plugin/grails-plantuml-plugin"
+    def scm = [ url: "https://github.com/david-w-millar/grails-plantuml-plugin" ]
+//    def dependsOn = [:]
+
     def pluginExcludes = [
         "grails-app/views/error.gsp"
     ]
 
-    // TODO Fill in these fields
-    def title = "Grails Plantuml Plugin Plugin" // Headline display name of the plugin
-    def author = "Your name"
-    def authorEmail = ""
-    def description = '''\
-Brief summary/description of the plugin.
-'''
 
-    // URL to the plugin's documentation
-    def documentation = "http://grails.org/plugin/grails-plantuml-plugin"
-
-    // Extra (optional) plugin metadata
-
-    // License: one of 'APACHE', 'GPL2', 'GPL3'
-//    def license = "APACHE"
-
-    // Details of company behind the plugin (if there is one)
-//    def organization = [ name: "My Company", url: "http://www.my-company.com/" ]
-
-    // Any additional developers beyond the author specified above.
+    // Your name could be here!
 //    def developers = [ [ name: "Joe Bloggs", email: "joe@bloggs.net" ]]
 
-    // Location of the plugin's issue tracker.
-//    def issueManagement = [ system: "JIRA", url: "http://jira.grails.org/browse/GPMYPLUGIN" ]
 
-    // Online location of the plugin's browseable source code.
-//    def scm = [ url: "http://svn.codehaus.org/grails-plugins/" ]
 
     def doWithWebDescriptor = { xml ->
         // TODO Implement additions to web.xml (optional), this event occurs before

@@ -11,8 +11,8 @@ def config = [
         format: 'png',
         verbose: 'true',
         config: '',
-        output: "src/docs/images",
-        dir: "src/docs/puml"
+        output: "${basedir}/src/docs/images",
+        dir: "${basedir}/src/docs/puml"
 ]
 
 ant.taskdef(name: 'plantuml', classname: 'net.sourceforge.plantuml.ant.PlantUmlTask', classpath: testClasspath)
