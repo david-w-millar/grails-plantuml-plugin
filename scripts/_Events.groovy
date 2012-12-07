@@ -1,7 +1,15 @@
-includeTargets << grailsScript("_GrailsInit")
+/**
+ * Handles PlantUML diagram generation in response to events
+ */
 
-target(main: "The description of the script goes here!") {
-    // TODO: Implement script here
+
+
+// Generate diagrams for inclusion in docs
+eventDocStart = { kind ->
+   // TODO: this
 }
 
-setDefaultTarget(main)
+eventDocEnd = { kind ->
+   // TODO: this
+}
+
