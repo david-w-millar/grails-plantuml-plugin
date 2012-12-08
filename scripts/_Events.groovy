@@ -3,7 +3,6 @@
  */
 
 
-
 // Generate diagrams for inclusion in docs
 eventDocStart = { kind ->
    println "::::: DocStart ${kind} - PUML Plugin"
@@ -20,7 +19,5 @@ eventCleanStart = {
    println "::::: CleanStart - PUML Plugin"
    // TODO: this
 }
-
-
 
 
