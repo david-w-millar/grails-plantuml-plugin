@@ -11,7 +11,8 @@ def config = [
         format: 'png',
         verbose: 'true',
         config: '',
-        output: "${basedir}/src/docs/images",
+        output: "${basedir}/src/docs/images", // TODO: get grails.doc.images property
+        //output: // TODO:
         dir: "${basedir}/src/docs/puml"
 ]
 

@@ -22,3 +22,8 @@ log4j = {
 
     warn   'org.mortbay.log'
 }
+
+grails.doc.authors = 'David W Millar
+grails.doc.licence = 'Apache'
+grails.doc.images =  "${basedir}/src/docs/images"
+

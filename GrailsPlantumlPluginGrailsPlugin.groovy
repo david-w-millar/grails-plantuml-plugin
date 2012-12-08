@@ -16,6 +16,7 @@ class GrailsPlantumlPluginGrailsPlugin {
     def license = "APACHE" // v2
 
     def pluginExcludes = [ "grails-app/views/error.gsp" ]
+    def scopes = [excludes: ['test', 'functional-test', 'run', 'war]]
 
     // Your name could be here!
 //    def developers = [ [ name: "Joe Bloggs", email: "joe@bloggs.net" ]]
