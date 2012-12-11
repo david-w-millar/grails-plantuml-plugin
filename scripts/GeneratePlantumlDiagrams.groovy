@@ -1,8 +1,7 @@
 /**
- * Generates plant uml diagrams from plantuml files located in "src/docs/uml/*".
+ * Generates plant uml diagrams from plantuml files
  *
  */
 includeTargets << new File("${basedir}/scripts/_PlantUML.groovy")
-setDefaultTarget("createPumlDiagrams")
+setDefaultTarget("plantuml")
 
-binding.variables.each { println it.dump() }

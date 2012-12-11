@@ -2,22 +2,16 @@
  * Handles PlantUML diagram generation in response to events
  */
 
+includeTargets << grailsScript('_GrailsPackage')
+includeTargets << new File('${basedir}/scripts/_PlantUML.groovy')
+
 
 // Generate diagrams for inclusion in docs
 eventDocStart = { kind ->
-   println "::::: DocStart ${kind} - PUML Plugin"
-   // TODO: this
+  if(kind != 'refdocs')
+    return
+  ant.sequential {
+    createPumlDiagrams()
+  }
 }
-
-eventDocEnd = { kind ->
-   println "::::: DocEnd ${kind} - PUML Plugin"
-   // TODO: this
-}
-
-// Clean Up
-eventCleanStart = {
-   println "::::: CleanStart - PUML Plugin"
-   // TODO: this
-}
-
 
