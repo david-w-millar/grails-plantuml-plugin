@@ -1,5 +1,5 @@
 /**
- * Handles PlantUML diagram generation in response to events
+ * Build event hooks for PumlDiagram generation
  */
 
 includeTargets << grailsScript('_GrailsPackage')
@@ -8,8 +8,8 @@ includeTargets << new File("${basedir}/scripts/_PlantUML.groovy")
 final def DOC_TYPE = 'refdocs'
 
 // Generate diagrams for inclusion in docs
-eventDocStart = { kind ->
-    if(kind != DOC_TYPE)
+eventDocStart = { type ->
+    if(type != DOC_TYPE)
         return
     ant.sequential {
         createPumlDiagrams()
@@ -17,7 +17,7 @@ eventDocStart = { kind ->
 }
 
 eventDocEnd = { kind ->
-    if(kind != DOC_TYPE)
+    if(type != DOC_TYPE)
         return
     ant.sequential {
       cleanPumlDiagrams()
