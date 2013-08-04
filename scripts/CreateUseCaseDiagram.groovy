@@ -1,4 +1,4 @@
 includeTargets << grailsScript("_GrailsInit")
-includeTargets << new File("${basedir}/scripts/_PlantUML.groovy")
+includeTargets << new File("$plantumlPluginDir/scripts/_PlantUML.groovy")
 
 setDefaultTarget(createUseCaseDiagram)

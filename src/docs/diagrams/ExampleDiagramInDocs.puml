@@ -1,0 +1,7 @@
+@startuml
+title Example Sequence Diagram in src/docs
+A->B: b()
+B->C: c()
+@enduml
+
+

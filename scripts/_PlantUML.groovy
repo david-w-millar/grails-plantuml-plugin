@@ -11,7 +11,11 @@ includeTargets << grailsScript('_GrailsCreateArtifacts')
 final def START_EVENT_NAME = 'PumlStart'
 final def END_EVENT_NAME = 'PumlEnd'
 
-final def DIAGRAM_SOURCE = "${basedir}/grails-app/diagrams"
+// ----- [ Locations of Diagram ] -----
+//final def DIAGRAM_SOURCE = "${basedir}/src/docs/diagrams"
+final def DIAGRAM_SOURCE = "${basedir}/src"
+
+//def sourceDirs = [ DIAGRAM_SOURCE, 'src']
 
 
 // TODO: add these as configuration parameters in Config.groovy
@@ -23,23 +27,41 @@ def plantUmlConfig = [
   output: "${basedir}/target/diagrams"
 ]
 
+
 // PlantUml Task
 ant.taskdef(name: 'plantuml', classname: 'net.sourceforge.plantuml.ant.PlantUmlTask', classpath: testClasspath)
 
-target(createPumlDiagrams: "Generate Diagrams from plantuml files"){
+
+// ----- [ Create / Clean  up diagrams ] -----
+target(generatePumlDiagrams: "Generate Diagrams from plantuml files"){
   event(START_EVENT_NAME, [])
-  ant.plantuml(plantUmlConfig){
-    fileset(dir: DIAGRAM_SOURCE)
+
+  showStatus("Starting PlantUML Diagram generation with config:")
+  def fstring = "\t%-15s%-20s"
+  plantUmlConfig.each { k, v ->
+    def msg = sprintf(fstring, [k,v])
+    showStatus msg
   }
+  showStatus(sprintf(fstring, ['source dirs', DIAGRAM_SOURCE]))
+
+  ant.plantuml(plantUmlConfig){
+    fileset(dir: DIAGRAM_SOURCE) { include(name: '**/*') }
+    fileset(dir: 'grails-app') {   include(name: '**/*') }
+  }
+  showStatus("Done PlantUML Diagram generation.")
   event(END_EVENT_NAME, [])
 }
 
+
 target(cleanPumlDiagrams: "Clean up intermediate puml diagrams"){
+  showStatus("Cleaning PlantUML diagrams...")
   ant.delete(dir: plantUmlConfig.output)
+  showStatus("Done.")
 }
 
 
-// -----[ Create Diagram Targets ]-----
+
+// ----- [ Create Diagrams ] -----
 
 target(createActivityDiagram: "Create an activity diagram") {
   depends(parseArguments)
@@ -82,3 +104,15 @@ target(createUseCaseDiagram: "Create a use case diagram") {
   def name = argsMap.params[0] + ".puml"
   grailsConsole.updateStatus("Creating use case diagram ${name} in ${DIAGRAM_SOURCE}")
 }
+
+// ----- [ Helpers ] -----
+
+def showStatus( String status, Boolean update = false) {
+  def msg = "[plantuml-plugin] ${status}"
+  update ?
+    grailsConsole.updateStatus(msg) :
+    grailsConsole.addStatus(msg)
+}
+
+
+
