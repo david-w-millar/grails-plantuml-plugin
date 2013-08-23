@@ -6,20 +6,19 @@ import net.sourceforge.plantuml.ant.PlantUmlTask
 
 includeTargets << grailsScript('_GrailsClasspath')
 includeTargets << grailsScript('_GrailsEvents')
-includeTargets << grailsScript('_GrailsCreateArtifacts')
 
-final def START_EVENT_NAME = 'PumlStart'
-final def END_EVENT_NAME = 'PumlEnd'
-
-// ----- [ Locations of Diagram ] -----
-//final def DIAGRAM_SOURCE = "${basedir}/src/docs/diagrams"
-final def DIAGRAM_SOURCE = "${basedir}/src"
-
-//def sourceDirs = [ DIAGRAM_SOURCE, 'src']
+final def START_EVENT_NAME = 'PumlGenerationStart'
+final def END_EVENT_NAME = 'PumlGenerationEnd'
 
 
-// TODO: add these as configuration parameters in Config.groovy
-// Default Config
+// ----- [ Config ] -----
+// TODO: pull in this config info from Config.groovy with sensible defaults
+// Default Configs
+def diagramSources = [
+  "${basedir}/src",
+  "${basedir}/grails-app"
+]
+
 def plantUmlConfig = [
   format: 'png',
   verbose: 'true',
@@ -42,11 +41,12 @@ target(generatePumlDiagrams: "Generate Diagrams from plantuml files"){
     def msg = sprintf(fstring, [k,v])
     showStatus msg
   }
-  showStatus(sprintf(fstring, ['source dirs', DIAGRAM_SOURCE]))
+  showStatus(sprintf(fstring, ['source dirs', diagramSources.join(', ')] ))
 
   ant.plantuml(plantUmlConfig){
-    fileset(dir: DIAGRAM_SOURCE) { include(name: '**/*') }
-    fileset(dir: 'grails-app') {   include(name: '**/*') }
+    diagramSources.each { String dir ->
+      fileset(dir: dir) { include(name: '**/*') }
+    }
   }
   showStatus("Done PlantUML Diagram generation.")
   event(END_EVENT_NAME, [])

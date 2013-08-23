@@ -18,6 +18,7 @@ grails.project.dependency.resolution = {
     }
     dependencies {
         build 'net.sourceforge.plantuml:plantuml:7943'
+        build 'org.grails:doc-engine:1.0.1'
     }
 
     plugins {
